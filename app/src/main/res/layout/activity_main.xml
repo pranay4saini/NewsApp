@@ -16,8 +16,8 @@
         app:layout_constraintTop_toTopOf="parent">
 
 
-        <fragment
-                android:id="@+id/newsNavHostFragment"
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/newsNavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:defaultNavHost = "true"

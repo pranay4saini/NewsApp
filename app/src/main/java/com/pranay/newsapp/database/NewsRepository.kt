@@ -1,4 +1,9 @@
 package com.pranay.newsapp.database
 
+import com.pranay.newsapp.api.RetrofitInstance
+
 class NewsRepository(val db:ArticleDatabase) {
+
+    suspend fun getBreakingNews(countryCode: String,pageNumber: Int) =
+        RetrofitInstance.api.getBreakingNews(countryCode, pageNumber)
 }
