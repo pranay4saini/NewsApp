@@ -1,4 +1,4 @@
-package com.pranay.newsapp
+package com.pranay.newsapp.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

@@ -1,4 +1,6 @@
-package com.pranay.newsapp
+package com.pranay.newsapp.model
+
+import com.pranay.newsapp.model.Article
 
 data class NewsResponse(
     val articles: List<Article>,
