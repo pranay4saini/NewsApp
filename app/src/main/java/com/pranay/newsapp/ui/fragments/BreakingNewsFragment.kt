@@ -15,10 +15,10 @@ import com.pranay.newsapp.ui.MainActivity
 import com.pranay.newsapp.ui.NewsViewModel
 import com.pranay.newsapp.util.Resource
 
-class BreakingNewsFragment:Fragment(R.layout.fragment_breaking_news) {
+class BreakingNewsFragment : Fragment(R.layout.fragment_breaking_news) {
 
     val TAG = "breakingnewsfragment"
-    lateinit var viewModel:NewsViewModel
+    lateinit var viewModel: NewsViewModel
     lateinit var newsAdapter: NewsAdapter
     private var binding: FragmentBreakingNewsBinding? = null
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -26,8 +26,8 @@ class BreakingNewsFragment:Fragment(R.layout.fragment_breaking_news) {
         binding = FragmentBreakingNewsBinding.bind(view)
         viewModel = (activity as MainActivity).viewModel
         setupRecyclerView()
-        viewModel.breakingNews.observe(viewLifecycleOwner, Observer {response ->
-            when(response){
+        viewModel.breakingNews.observe(viewLifecycleOwner, Observer { response ->
+            when (response) {
                 is Resource.Success -> {
                     hideProgressBar()
                     response.data?.let { newsResponse ->
@@ -38,9 +38,10 @@ class BreakingNewsFragment:Fragment(R.layout.fragment_breaking_news) {
                 is Resource.Error -> {
                     hideProgressBar()
                     response.message?.let { message ->
-                        Log.e(TAG,"An error occured: $message ")
+                        Log.e(TAG, "An error occured: $message ")
                     }
                 }
+
                 is Resource.Loading -> {
                     showProgressBar()
                 }
@@ -52,6 +53,7 @@ class BreakingNewsFragment:Fragment(R.layout.fragment_breaking_news) {
     private fun hideProgressBar() {
         binding?.paginationProgressBar?.visibility = View.INVISIBLE
     }
+
     private fun showProgressBar() {
         binding?.paginationProgressBar?.visibility = View.VISIBLE
     }
