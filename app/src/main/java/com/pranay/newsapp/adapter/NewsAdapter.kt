@@ -13,6 +13,8 @@ import com.pranay.newsapp.databinding.ItemArticlePreviewBinding
 import com.pranay.newsapp.model.Article
 
 class NewsAdapter: RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
+
+    inner class ArticleViewHolder(val binding :ItemArticlePreviewBinding):RecyclerView.ViewHolder(binding.root)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
 
         val binding = ItemArticlePreviewBinding.inflate(LayoutInflater.from(parent.context),parent,false)
@@ -30,7 +32,7 @@ class NewsAdapter: RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
                 binding.tvTitle.text = article.title
                 binding.tvDescription.text = article.description
                 binding.tvPublishAt.text = article.publishedAt
-                setOnItemClickListener {
+                setOnClickListener {
                     onItemClickListener?.let{
                         it(article)
                     }
@@ -45,7 +47,7 @@ class NewsAdapter: RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
         return differ.currentList.size
     }
 
-    inner class ArticleViewHolder(val binding :ItemArticlePreviewBinding):RecyclerView.ViewHolder(binding.root)
+
 
     private val differCallback = object : DiffUtil.ItemCallback<Article>(){
         override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean {
