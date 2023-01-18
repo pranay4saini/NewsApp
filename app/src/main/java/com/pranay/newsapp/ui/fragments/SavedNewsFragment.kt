@@ -7,7 +7,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView import com.google.android.material.snackbar.Snackbar
 import com.pranay.newsapp.R
 import com.pranay.newsapp.adapter.NewsAdapter
 import com.pranay.newsapp.databinding.FragmentSavedNewsBinding
@@ -48,7 +48,20 @@ class SavedNewsFragment:Fragment(R.layout.fragment_saved_news) {
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
 
+                val position = viewHolder.adapterPosition
+                val article = newsAdapter.differ.currentList[position]
+                viewModel.deleteArticle(article)
+                Snackbar.make(view,"Successfully deleted article",Snackbar.LENGTH_LONG).apply {
+                    setAction("Undo"){
+                        viewModel.saveArticle(article)
+                    }
+                    show()
+                }
             }
+        }
+
+        ItemTouchHelper(itemTouchHelperCallback).apply {
+            attachToRecyclerView(binding?.rvSavedNews)
         }
         viewModel.getSavedNews().observe(viewLifecycleOwner, Observer { articles ->
         newsAdapter.differ.submitList(articles)
